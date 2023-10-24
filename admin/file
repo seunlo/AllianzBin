@@ -1,0 +1,116 @@
+<?php
+
+include "Db.php";
+
+class Proverb extends Db
+{
+  //fetch all proverbs
+  public function fetch_proverbs()
+  {
+    $sql = "SELECT * FROM proverb WHERE pro_active = 1";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute();
+
+    $proverbs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $proverbs;
+  }
+
+  //fetch proverb details
+  public function fetch_proverb_details($pro_id)
+  {
+    $sql = "SELECT * FROM proverb WHERE pro_id = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->bindParam(1, $pro_id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $pro_count = $stmt->rowCount();
+    if ($pro_count < 1) { //it doesnt exist
+      return false;
+    } else { //it does exist
+      $proverb = $stmt->fetch(PDO::FETCH_ASSOC);
+      return $proverb;
+    }
+  }
+
+  //update a proverb
+  public function update_proverb($pro_id, $pro_body, $pro_source)
+  {
+    $sql = "SELECT * FROM proverb WHERE pro_id = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->bindParam(1, $pro_id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $pro_count = $stmt->rowCount();
+    if ($pro_count < 1) { //it doesnt exist
+      return false;
+    } else {
+      $sql = "UPDATE proverb SET pro_body = ?, pro_source = ? WHERE pro_id = ?";
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->bindParam(1, $pro_body, PDO::PARAM_STR);
+      $stmt->bindParam(2, $pro_source, PDO::PARAM_STR);
+      $stmt->bindParam(3, $pro_id, PDO::PARAM_INT);
+
+      $proverb_updated = $stmt->execute();
+      if ($proverb_updated) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  //delete proverb
+  public function delete_proverb($pro_id)
+  {
+
+    $sql = "SELECT * FROM proverb WHERE pro_id = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->bindParam(1, $pro_id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $pro_count = $stmt->rowCount();
+    if ($pro_count < 1) { //it doesnt exist
+      return false;
+    } else {
+
+      $sql = "DELETE FROM proverb WHERE pro_id = ?";
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->bindParam(1, $pro_id, PDO::PARAM_INT);
+
+      $proverb_deleted = $stmt->execute();
+      if ($proverb_deleted) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+  //add proverb
+  public function add_proverb($pro_body, $pro_source)
+  {
+    $sql = "INSERT INTO proverb(pro_body, pro_source) VALUES(?, ?)";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->bindParam(1, $pro_body, PDO::PARAM_STR);
+    $stmt->bindParam(2, $pro_source, PDO::PARAM_STR);
+
+    $proverb_created = $stmt->execute();
+    if ($proverb_created) {
+      return true;
+    } else {
+      return false;
+    }
+
+  }
+
+
+}
+$pro = new Proverb();
+//echo "<pre>";
+//print_r($pro->fetch_proverbs());
+//print_r($pro->fetch_proverb_details(2));
+//print_r($pro->update_proverb(1, "an angry lion is dangerous", "ijesha proverbs"));
+//print_r($pro->delete_proverb(1));
+//print_r($pro->add_proverb("A good food makes the sould happy", "An hungry man"));
+
+
+?>
