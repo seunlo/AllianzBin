@@ -1,5 +1,5 @@
 <?php
-require_once "Db.php";
+require_once "../classes/Db.php";
 
 class Payment extends Db
 {

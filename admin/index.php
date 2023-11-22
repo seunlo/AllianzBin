@@ -1,5 +1,4 @@
 <?php
-//session_start();
 include "partials/header.php";
 //require_once "guards/guard.php";
 ?>
@@ -28,7 +27,7 @@ include "partials/header.php";
           </div>
           <div>
             <div class="text-center">
-              <a href="index.php?category_amount" class="text-white text-decoration-none"><i
+              <a href="index.php?view_fee" class="text-white text-decoration-none"><i
                   class="fa-solid fa-money-check-dollar fa-3x text-danger"></i></a>
             </div>
             <p class="text-center fw-bold">Fees</p>
@@ -104,8 +103,13 @@ if (isset($_GET['view_payment'])) {
 }
 ?>
 <?php
-if (isset($_GET['category_amount'])) {
-  include "category_amount.php";
+if (isset($_GET['view_fee'])) {
+  include "view_fee.php";
+}
+?>
+<?php
+if (isset($_GET['edit_fee'])) {
+  include "edit_fee.php";
 }
 ?>
 <?php
@@ -118,3 +122,5 @@ if (isset($_GET['view_complain'])) {
   include "view_complain.php";
 }
 ?>
+
+<?php include "partials/footer.php"; ?>

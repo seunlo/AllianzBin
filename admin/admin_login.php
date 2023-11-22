@@ -19,7 +19,7 @@ if ($_POST) {
     }
 
     //Validation for if either email or password is wrong.
-    $admin = new Customer();
+    $admin = new Customers();
     $response = $admin->logCustomer($cust_user_name, $cust_password);
     if ($response) {
       $_SESSION['login_error'] = "Error, either email or password is incorrect";
@@ -57,5 +57,5 @@ if ($_POST) {
         </div>
       </form>
     </div>
-
   </div>
+  <?php include "partials/footer.php";?>

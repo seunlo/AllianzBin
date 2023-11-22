@@ -1,9 +1,16 @@
 <?php
 include "classes/Fee.php";
 $test = new Fee();
-$all_fees = $test->get_all_payment();
+$all_fees = $test->get_payment();
 // echo "<pre>";
 // print_r($all_fees);
+// exit();
+
+
+if (isset($_POST['btn_delete'])) {
+  $fee_id = $_POST['del_fee'];
+  $test->delete_fee($fee_id);
+}
 ?>
 
 <div class="container">
@@ -21,7 +28,7 @@ $all_fees = $test->get_all_payment();
                 <tr class='text-center'>
                   <th>S/N</th>
                   <th>Fee Amount</th>
-                  <th>Category ID</th>
+                  <th>Category Name</th>
                   <th>Edit</th>
                   <th>Delete</th>
                 </tr>
@@ -37,29 +44,23 @@ $all_fees = $test->get_all_payment();
                       <?php echo $key['fee_amount']; ?>
                     </td>
                     <td>
-                      <?php echo $key['cat_id']; ?>
+                      <?php echo $key['cat_name']; ?>
                     </td>
                     <td>
-                      <a href="edit_category.php?id=<?php echo $key['cat_id']; ?>" class='text-light'><i
+                      <a href="index.php?edit_fee=<?php echo $key['fee_id']; ?>" class='text-light'><i
                           class='fa-solid fa-pen-to-square'></i>
                       </a>
                     </td>
                     <td>
                       <form action="" method="post">
-                        <input type="hidden" name="del_cat" value="<?php echo $key['cat_id']; ?>">
+                        <input type="hidden" name="del_fee" value="<?php echo $key['fee_id']; ?>">
                         <button type="submit" classs="btn btn-sm btn-danger" name="btn_delete"><i
-                            class='fa fa-trash'></i></button>
+                            class='fa fa-trash'></i>delete</button>
                       </form>
                     </td>
                     </form>
                   </tr>
                 <?php } ?>
-
-                <?php
-                if (isset($_POST['btn_delete'])) {
-                  $cat->delete_category($key['cat_id']);
-                }
-                ?>
               </tbody>
             </table>
           </div>

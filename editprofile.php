@@ -1,6 +1,6 @@
 <?php
 
-require_once("guards/customer_guard.php");
+
 include_once "classes/Community.php";
 include_once "classes/Category.php";
 require_once "classes/Customer.php";
@@ -9,8 +9,8 @@ if (isset($_SESSION["cust_id"])) {
   $cust_id = $_SESSION["cust_id"];
   $customer = new Customer();
   $response = $customer->retrieveCustomer($cust_id);
-  //echo "<pre>";
-  //print_r($response);
+  // echo "<pre>";
+  // print_r($response);
 }
 
 
@@ -28,10 +28,10 @@ if (isset($_POST['edit_btn'])) {
   $cust_phone_number = $_POST["phone"];
   $cust_home_address = $_POST["home_address"];
   $cust_location = $_POST["cust_location"];
-  $cust_category = $_POST["cust_category"];
+  $cat_id = $_POST["cust_category"];
   //$cust_id = $_POST["cust_id"];
 
-  if (empty($cust_full_name) || empty($cust_phone_number) || empty($cust_home_address) || empty($cust_location) || empty($cust_category)) {
+  if (empty($cust_full_name) || empty($cust_phone_number) || empty($cust_home_address) || empty($cust_location) || empty($cat_id)) {
     echo "<script>alert('All Fields are required')</script>";
     exit();
   }
@@ -39,7 +39,7 @@ if (isset($_POST['edit_btn'])) {
 
 
   $customer = new Customer();
-  $profile_updated = $customer->update_customer($cust_full_name, $cust_phone_number, $cust_home_address, $cust_location, $cust_category, $cust_id);
+  $profile_updated = $customer->update_customer($cust_full_name, $cust_phone_number, $cust_home_address, $cust_location, $cat_id, $cust_id);
 
   //   if ($profile_updated) {
 //     header("location:profile.php");

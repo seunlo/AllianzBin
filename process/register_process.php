@@ -34,7 +34,10 @@ if ($_POST) {
     $response = $customer->regCustomer($cust_full_name, $cust_email, $cust_user_name, $hashed_password);
 
     if ($response) {
-      echo "<script>alert('Registered successfully')</script>";
+      echo "<script>alert('Registered successfully');
+      window.location.href = '../login.php';      
+      </script>";
+      
     }
   }
 } else {

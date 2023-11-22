@@ -1,16 +1,8 @@
 <?php
 //session_start();
-include_once "partials/header_profile.php";
-//require_once("guards/customer_guard.php");
-
-
+include_once "partials/header.php";
 
 ?>
-
-
-
-
-
 
 <div class="container">
   <div class="row mt-5">
@@ -21,40 +13,44 @@ include_once "partials/header_profile.php";
         </div>
         <div class="card-body d-flex m-auto pt-5">
           <div>
-          <div class="text-center">
+            <div class="text-center">
               <a href="profile.php?editprofile" class="text-white text-decoration-none"><i
                   class="fa-solid fa-square-pen fa-3x text-success"></i></a>
             </div>
             <p>Update Profile</p>
           </div>
           <div class="mx-5">
-          <div class="text-center">
+            <div class="text-center">
               <a href="profile.php?view_profile" class="text-white text-decoration-none"><i
                   class="fa-solid fa-user fa-3x text-success"></i></a>
             </div>
             <p>View Profile</p>
           </div>
           <div>
-          <div class="text-center">
-              <a href="profile.php?changepassword" class="text-white text-decoration-none"><i class="fa-solid fa-key fa-3x text-success"></i></a>
+            <div class="text-center">
+              <a href="profile.php?changepassword" class="text-white text-decoration-none"><i
+                  class="fa-solid fa-key fa-3x text-success"></i></a>
             </div>
             <p>Change Password</p>
           </div>
           <div class="mx-5">
-          <div class="text-center">
-              <a href="profile.php?complaint" class="text-white text-decoration-none"><i class="fa-solid fa-message fa-3x text-success"></i></a>
+            <div class="text-center">
+              <a href="profile.php?complaint" class="text-white text-decoration-none"><i
+                  class="fa-solid fa-message fa-3x text-success"></i></a>
             </div>
             <p>Complaint</p>
           </div>
           <div class="me-5">
-          <div class="text-center">
-              <a href="profile.php?view_location" class="text-white text-decoration-none"><i class="fa-solid fa-location-dot fa-3x text-success"></i></a>
+            <div class="text-center">
+              <a href="profile.php?view_location" class="text-white text-decoration-none"><i
+                  class="fa-solid fa-location-dot fa-3x text-success"></i></a>
             </div>
             <p>View Location</p>
           </div>
           <div>
             <div class="text-center">
-              <a href="profile.php?view_payment" class="text-white text-decoration-none"><i class="fa-solid fa-wallet fa-3x text-success"></i></a>
+              <a href="profile.php?view_payment" class="text-white text-decoration-none"><i
+                  class="fa-solid fa-wallet fa-3x text-success"></i></a>
             </div>
             <p>View Payment History</p>
           </div>
@@ -99,3 +95,5 @@ include_once "partials/header_profile.php";
     </div>
   </div>
 </div>
+
+<?php include "partials/footer.php"; ?>

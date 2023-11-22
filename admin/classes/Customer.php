@@ -1,7 +1,7 @@
 <?php
 
-include_once "Db.php";
-class Customer extends Db
+require_once("../classes/Db.php");
+class Customers extends Db
 {
 
   public function regCustomer($cust_full_name, $cust_email, $cust_user_name, $cust_password)
@@ -72,14 +72,24 @@ class Customer extends Db
     return $cust_details;
   }
 
+
   public function fetch_all_customers()
   {
-    $sql = "SELECT * FROM customers";
+    $sql = "SELECT customers.cust_id, customers.cust_full_name, customers.cust_email, customers.cust_user_name, customers.cust_phone_number, customers.cust_home_address, customers.cust_location, category.cat_name
+    FROM customers JOIN category ON customers.cat_id = category.cat_id";
     $stmt = $this->connect()->prepare($sql);
     $stmt->execute();
     $customers = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $customers;
   }
+
+  // public function get_all_customers(){
+  //   $sql = "select * from customers";
+  //   $stmt = $this->connect()->prepare($sql);
+  //   $stmt->execute();
+  //   $customers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  //   return $customers;
+  // }
 
   public function update_customer($cust_full_name, $cust_phone_number, $cust_home_address, $cust_location, $cust_id)
   {
@@ -97,7 +107,7 @@ class Customer extends Db
   }
 }
 
-$customer = new Customer();
+$customer = new Customers();
 //echo $customer->regCustomer("Seun Jacobs", "seunlo99@gmail.com", "seunloveme2", "glory");
 //echo $customer->logCustomer("seunlo@gmail.com", "test");
 //echo "<pre>";

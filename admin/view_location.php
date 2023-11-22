@@ -4,6 +4,12 @@ $location = new Alagbado();
 $all_location = $location->fetch_all_location();
 //echo "<pre>";
 //print_r($all_location);
+
+if (isset($_POST['btn_delete'])) {
+  $comm_id = $_POST['del_location'];
+  $location->delete_location($comm_id);
+
+}
 ?>
 
 <div class="container">

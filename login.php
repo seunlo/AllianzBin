@@ -1,6 +1,5 @@
 <?php
 require_once("partials/header.php");
-session_start();
 ?>
 <div class="row">
   <div class="col-lg-8 innermind"></div>

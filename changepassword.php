@@ -1,5 +1,5 @@
 <?php
-require_once("partials/header_profile.php");
+require_once("partials/header.php");
 require_once "classes/Customer.php";
 $cust_id = $_SESSION["cust_id"];
 $customer = new Customer();

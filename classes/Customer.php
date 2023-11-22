@@ -91,7 +91,9 @@ class Customer extends Db
 
   public function retrieveCustomer($cust_id)
   {
-    $sql = "SELECT * FROM customers WHERE cust_id = ?";
+    $sql = "SELECT customers.cust_id, customers.cust_full_name, customers.cust_email, customers.cust_user_name, customers.cust_phone_number, customers.cust_home_address, customers.cust_location, customers.cust_registration_date, category.cat_name
+    FROM customers LEFT JOIN category ON customers.cat_id = category.cat_id
+    WHERE cust_id = ?";
     $stmt = $this->connect()->prepare($sql);
     $stmt->bindParam(1, $cust_id, PDO::PARAM_INT);
     $stmt->execute();
@@ -101,25 +103,35 @@ class Customer extends Db
 
   public function fetch_all_customers()
   {
-    $sql = "SELECT * FROM customers";
+    $sql = "SELECT customers.cust_id, customers.cust_full_name, customers.cust_email, customers.cust_user_name, customers.cust_phone_number, customers.cust_home_address, customers.cust_location, category.cat_name
+    FROM customers JOIN category ON customers.cat_id = category.cat_id";
     $stmt = $this->connect()->prepare($sql);
     $stmt->execute();
     $customers = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $customers;
   }
 
-  public function update_customer($cust_full_name, $cust_phone_number, $cust_home_address, $cust_location, $cust_category, $cust_id)
+  // public function fetch_all_customers()
+  // {
+  //   $sql = "SELECT * FROM customers";
+  //   $stmt = $this->connect()->prepare($sql);
+  //   $stmt->execute();
+  //   $customers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  //   return $customers;
+  // }
+
+  public function update_customer($cust_full_name, $cust_phone_number, $cust_home_address, $cust_location, $cat_id, $cust_id)
   {
-    $sql = "UPDATE customers SET cust_full_name = ?, cust_phone_number = ?, cust_home_address = ?, cust_location = ?, cust_category = ? WHERE cust_id = ?";
+    $sql = "UPDATE customers SET cust_full_name = ?, cust_phone_number = ?, cust_home_address = ?, cust_location = ?, cat_id = ? WHERE cust_id = ?";
     $stmt = $this->connect()->prepare($sql);
     $stmt->bindParam(1, $cust_full_name, PDO::PARAM_STR);
     $stmt->bindParam(2, $cust_phone_number, PDO::PARAM_INT);
     $stmt->bindParam(3, $cust_home_address, PDO::PARAM_STR);
     $stmt->bindParam(4, $cust_location, PDO::PARAM_STR);
-    $stmt->bindParam(5, $cust_category, PDO::PARAM_STR);
+    $stmt->bindParam(5, $cat_id, PDO::PARAM_STR);
     $stmt->bindParam(6, $cust_id, PDO::PARAM_INT);
 
-    $updated_record = $stmt->execute();
+    $stmt->execute();
     echo "<script>alert('Profile Updated Successfully')</script>";
     //return $updated_record;
   }

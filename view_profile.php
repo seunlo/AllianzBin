@@ -74,7 +74,7 @@ $allcustomers = $customer->retrieveCustomer($cust_id);
               <h6>Category</h6>
             </div>
             <p class="bg-secondary text-light">
-              <?php echo $allcustomers['cust_category']; ?>
+              <?php echo $allcustomers['cat_name']; ?>
             </p>
           </div>
           <div class="col-md-6 text-center">

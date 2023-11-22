@@ -1,30 +1,21 @@
 <?php
-require_once "Db.php";
+require_once "../classes/Db.php";
 
 class Category extends Db
 {
 
   public function add_category($cat_name)
   {
-    //check if email is in db before
-    $sql = "SELECT * FROM category WHERE cat_name = ?";
+    $sql = "INSERT INTO category(cat_name) VALUES(?)";
     $stmt = $this->connect()->prepare($sql);
     $stmt->bindParam(1, $cat_name, PDO::PARAM_STR);
-    $stmt->execute();
-    $category_count = $stmt->rowCount();
-    //if $category_count is greater than zero it means the category already exist in the db
-    if ($category_count > 0) {
-      echo "<script>alert('This category is already registered')</script>";
-      exit();
-    } else {
-
-      //category does not exist to get to this line, so insert into db
-      $sql = "INSERT INTO category(cat_name) VALUES(?)";
-      $stmt = $this->connect()->prepare($sql);
-      $stmt->bindParam(1, $cat_name, PDO::PARAM_STR);
-      $stmt->execute();
-      echo "<script>alert('Category added successfully')</script>";
+    $response = $stmt->execute();
+    if ($response) {
+      echo "<script>alert('Category Added Successfully');
+      window.location.href = '../admin/index.php?view_category';      
+      </script>";
     }
+    echo "<script>alert('Category added successfully')</script>";
   }
 
   public function update_category($cat_name, $cat_id)
@@ -39,8 +30,9 @@ class Category extends Db
     $stmt->execute();
     $category_count = $stmt->rowCount();
     if ($category_count > 0) {
-      echo "<script>alert('Category Updated Successfully')</script>";
-      exit();
+      echo "<script>alert('Category Updated Successfully');
+      window.location.href = '../admin/index.php?view_category';             
+      </script>";
     }
 
 
@@ -55,9 +47,12 @@ class Category extends Db
     $stmt = $this->connect()->prepare($sql);
     $stmt->bindParam(1, $cat_id, PDO::PARAM_INT);
 
-    $stmt->execute();
-    echo "<script>alert('Category Deleted Successfully')</script>";
-
+    $response = $stmt->execute();
+    if ($response) {
+      echo "<script>alert('Category Deleted Successfully');
+      window.location.href = '../admin/index.php?view_category';      
+      </script>";
+    }
   }
 
   public function get_category_detail($cat_id)
@@ -66,16 +61,8 @@ class Category extends Db
     $stmt = $this->connect()->prepare($sql);
     $stmt->bindparam(1, $cat_id, PDO::PARAM_INT);
     $stmt->execute();
-    $count = $stmt->rowCount(); //count how many records have the id.
-    //Count < 1 means no record with that id.
-    if ($count < 1) {
-      return false;
-
-    } else {
-      //This mean the book exist, so we fetch it and return it
-      $book = $stmt->fetch(PDO::FETCH_ASSOC);
-      return $book;
-    }
+    $cat = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $cat;
 
   }
 

@@ -1,4 +1,5 @@
 <section class="news">
+  <!--
   <div class="container pt-5 pb-2">
     <div class="row">
       <div class="col-lg-9 m-auto text-center">
@@ -46,14 +47,19 @@
       </div>
     </div>
   </div>
-  <div class="row footerend">
+-->
+<div class="container-fluid overflow-hidden">
+  <div class="row bg-secondary pt-2">
     <div class="col-lg">
       <p class="text-center py-2">Copyright &copy;
-        <?php echo date("Y"); ?> All rights reserved | This website is created by Seun Jacobs
+        <?php echo date("Y"); ?> All rights reserved
       </p>
     </div>
   </div>
+  </div>
 </section>
+<script src="bootstrap/js/jquery.js"></script>
+<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

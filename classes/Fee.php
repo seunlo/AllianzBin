@@ -34,6 +34,9 @@ class Fee extends Db
 
   public function get_payment($cat_id)
   {
+
+    // echo "$cat_id";
+    // exit();
     $sql = "SELECT fee_amount FROM `fee` where cat_id =?";
     $stmt = $this->connect()->prepare($sql);
     $stmt->bindParam(1, $cat_id, PDO::PARAM_INT);

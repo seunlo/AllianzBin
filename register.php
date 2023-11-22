@@ -1,6 +1,5 @@
 <?php
 include_once "partials/header.php";
-session_start();
 
 ?>
 <div class="userarea">

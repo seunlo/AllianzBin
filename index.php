@@ -1,11 +1,14 @@
 <?php
-require_once("partials/header_profile.php");
+require_once("partials/header.php");
 include_once "classes/Customer.php";
 $customer = new Customer();
 $allcustomers = $customer->retrieveCustomer($cust_id);
+// echo "<pre>";
+// print_r($allcustomers);
+// exit();
 
 
-$category = $allcustomers['cust_category'];
+$category = $allcustomers['cat_name'];
 
 ?>
 
@@ -43,19 +46,12 @@ $category = $allcustomers['cust_category'];
       <div class="col-md">
         <form action="payment.php" method="post">
           <input type="hidden" name="cust_id" value="<?php echo $allcustomers['cust_id'] ?>">
-          <?php if(!empty($category))
-          { 
-          ?>
-          <button class="btn gen_btn">Pay
-            Bill</button>
-          <?php
-          }else{
-            ?>
-             <button class="btn gen_btn" disabled>Pay
-            Bill</button>
-         <?php   
-          }
-          ?>
+          <?php if (!empty($category)) { ?>
+            <button class="btn gen_btn">PayBill</button>
+            <?php
+          } else { ?>
+            <button class="btn gen_btn" disabled>PayBill</button>
+          <?php } ?>
         </form>
       </div>
     </div>

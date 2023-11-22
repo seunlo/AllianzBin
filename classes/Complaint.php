@@ -15,7 +15,9 @@ class Complaint extends Db
     $stmt->bindParam(4, $description, PDO::PARAM_STR);
     $stmt->bindParam(5, $created_at, PDO::PARAM_STR);
     $stmt->execute();
-    echo "<script>alert('Complaint added successfully')</script>";
+    echo "<script>alert('Complaint added successfully');
+    window.location.href = './profile.php?complaint';     
+    </script>";
   }
 
   public function get_one_complaint($cust_id)

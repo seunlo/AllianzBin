@@ -2,16 +2,15 @@
 session_start();
 //require_once("guards/customer_guard.php");
 
-require_once "classes/Customer.php";
+require_once "./classes/Customer.php";
 
 
 if (isset($_SESSION["cust_id"])) {
   $cust_id = $_SESSION["cust_id"];
-  $customer = new Customer();
+  $customer = new Customers();
   $response = $customer->retrieveCustomer($cust_id);
-  // echo "<pre>";
-  // print_r($response);
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -31,20 +30,14 @@ if (isset($_SESSION["cust_id"])) {
 
 <body>
   <!-----------------------------HEADER SECTION STARTS HERE--------------------->
-  <header>
-    <div class="row">
-      <div class="col-md-11 m-auto">
-        <a href="#"><img src="assets/images/logo.png" alt="logo_image" class="logo"></a>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12 header bg-secondary">
-        <nav class="navbar navbar-expand-lg">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
-            aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarScroll">
+  <nav class="navbar navbar-expand-md bg-secondary">
+    <div class="container">
+      <a href="#"><img src="assets/images/logo.png" alt="logo_image" class="logo"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+        aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarScroll">
             <ul class="navbar-nav mx-5 my-2 my-lg-0">
               <li class="nav-item">
                 <a class="nav-link" href="index.php">Home</a>
@@ -65,15 +58,33 @@ if (isset($_SESSION["cust_id"])) {
           </div>
           <div class="mx-5">
             <h5 class="mb-0 text-light fw-bold">
-              <?php echo $response["cust_full_name"]; ?>(Admin)
+              <?php
+              if (!empty($response["cust_full_name"])) {
+                echo $response["cust_full_name"];
+              } ?>
+
+              <?php
+              if (!empty($cust_id)) {
+                ?>
+              (Admin)
+              <?php
+              }
+              ?>
             </h5>
           </div>
           <ul class="navbar-nav">
             <li>
+              <?php
+              if (!empty($cust_id)) {
+                ?>
               <a class="nav-link bg-danger rounded-3 text-light text-danger" href="sign_out.php">Logout</a>
+              <?php
+              }
+              ?>
+
             </li>
           </ul>
         </nav>
       </div>
     </div>
-  </header>
+    </div>

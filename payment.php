@@ -1,16 +1,23 @@
 <?php
 
-require_once("partials/header_profile.php");
+require_once("partials/header.php");
 include_once "guards/customer_guard.php";
 require_once "classes/Customer.php";
 require_once "classes/Fee.php";
 $cust_id = $_SESSION["cust_id"];
 $customer = new Customer();
 $all_customer = $customer->retrieveCustomer($cust_id);
-$cat_id = $all_customer['cust_category'];
+// echo "<pre>";
+// print_r($all_customer);
+// exit();
+
+$cat_id = $all_customer['cat_id'];
 
 $fee_amount = new Fee();
 $result = $fee_amount->get_payment($cat_id);
+// echo "<pre>";
+// print_r($result);
+// exit();
 $amount = $result['fee_amount'];
 
 

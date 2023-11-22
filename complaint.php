@@ -63,9 +63,9 @@ $all_comp = $comp->get_one_complaint($cust_id);
                   <?php echo $pay['updated_at']; ?>
                 </td>
 
-                <td>
+                <!-- <td>
                   <a href="profile.php?add_complaint&refcode=<?php //echo $pay['refcode'];?>"> Response </a>
-                </td>
+                </td> -->
               </tr>
             <?php }
             ; ?>

@@ -4,6 +4,12 @@ $cat = new Category();
 $all_cat = $cat->fetch_all_category();
 //echo "<pre>";
 //print_r($all_cat);
+
+if (isset($_POST['btn_delete'])) {
+  $cat_id = $_POST['del_cat'];
+  $cat->delete_category($cat_id);
+}
+
 ?>
 
 <div class="container">
@@ -13,9 +19,9 @@ $all_cat = $cat->fetch_all_category();
         <div class="row">
           <div class="col">
             <h3 class="text-center text-success mt-3">View Category</h3>
-              <button class="btn btn-danger btn-lg w-100">
-                <a href="index.php?add_category" class="text-decoration-none text-light">Add Category</a>
-              </button>
+            <button class="btn btn-danger btn-lg w-100">
+              <a href="index.php?add_category" class="text-decoration-none text-light">Add Category</a>
+            </button>
             <table class='table table-bordered mt-3'>
               <thead class="bg-secondary">
                 <tr class='text-center'>
@@ -36,31 +42,20 @@ $all_cat = $cat->fetch_all_category();
                       <?php echo $key['cat_name']; ?>
                     </td>
                     <td>
-                      <a href="index.php?edit_category" class='text-light'><i
+                      <a href="index.php?edit_category=<?php echo $key['cat_id']; ?>" class='text-light'><i
                           class='fa-solid fa-pen-to-square'></i>
                       </a>
                     </td>
-                    <!-- <td>
-                      <a href="edit_category.php?id=<?php echo $key['cat_id']; ?>" class='text-light'><i
-                          class='fa-solid fa-pen-to-square'></i>
-                      </a>
-                    </td> -->
                     <td>
                       <form action="" method="post">
                         <input type="hidden" name="del_cat" value="<?php echo $key['cat_id']; ?>">
                         <button type="submit" classs="btn btn-sm btn-danger" name="btn_delete"><i
-                            class='fa fa-trash'></i></button>
+                            class='fa fa-trash'></i>delete</button>
                       </form>
                     </td>
                     </form>
                   </tr>
                 <?php } ?>
-
-                <?php
-                if (isset($_POST['btn_delete'])) {
-                  $cat->delete_category($key['cat_id']);
-                }
-                ?>
               </tbody>
             </table>
           </div>

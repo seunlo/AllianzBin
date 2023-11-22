@@ -1,9 +1,9 @@
 <?php
 include_once "classes/Customer.php";
-$customer = new Customer();
+$customer = new Customers();
 $allcustomers = $customer->fetch_all_customers();
-//echo "<pre>";
-//print_r($allcustomers);
+// echo "<pre>";
+// print_r($allcustomers);
 ?>
 
 <div class="container">
@@ -56,7 +56,7 @@ $allcustomers = $customer->fetch_all_customers();
                       <?php echo $key['cust_location']; ?>
                     </td>
                     <td>
-                      <?php echo $key['cust_category']; ?>
+                      <?php echo $key['cat_name']; ?>
                     </td>
                   </tr>
                 <?php } ?>
